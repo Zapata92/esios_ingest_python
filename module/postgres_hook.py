@@ -38,8 +38,8 @@ class PostgresEsiosHook():
         conn = self.get_conn()
         login = ""
         if conn.login:
-            login = ("{login}:{pass}@".format(login=self.login,
-                                              pass=self.pass))
+            login = ("{login}:{passw}@".format(login=self.login,
+                                              passw=self.passw))
         host = self.host
         if self.port is not None:
             host += ":{port}".format(port=self.port)
