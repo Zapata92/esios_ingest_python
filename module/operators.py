@@ -107,7 +107,7 @@ class EsiosOperator():
             if c not in df_columns:
                 print("There is not data if field {}, se completa con ceros"
                       .format(c))
-                df[i] = 0
+                df[c] = 0
             else:
                 pass
         return df
