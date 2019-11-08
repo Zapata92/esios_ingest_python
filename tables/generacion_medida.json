@@ -1,0 +1,125 @@
+{
+  "provincia": true,
+  "indicadores": [
+    {
+      "esios_name": "Generación medida cogeneración",
+      "postgres_name": "gmedida_cogeneracion",
+      "esios_id": "10039",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Fuel-gas",
+      "postgres_name": "gmedida_fuelgas",
+      "esios_id": "10038",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Eólica",
+      "postgres_name": "gmedida_eolica",
+      "esios_id": "10037",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Carbón",
+      "postgres_name": "gmedida_carbon",
+      "esios_id": "10036",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Hidráulica",
+      "postgres_name": "gmedida_hidraulica",
+      "esios_id": "10035",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Biomasa",
+      "postgres_name": "gmedida_biomasa",
+      "esios_id": "1168",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Solar térmica",
+      "postgres_name": "gmedida_solartermica",
+      "esios_id": "1162",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Ciclo combinado",
+      "postgres_name": "gmedida_ccombinado",
+      "esios_id": "1156",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Nuclear",
+      "postgres_name": "gmedida_nuclear",
+      "esios_id": "1153",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Turbinación bombeo",
+      "postgres_name": "gmedida_turbinacionbombeo",
+      "esios_id": "1152",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Océano y geotérmica",
+      "postgres_name": "gmedida_oceano_geotermica",
+      "esios_id": "1163",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Solar fotovoltaica",
+      "postgres_name": "gmedida_fotovoltaica",
+      "esios_id": "1161",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Enlace Baleares",
+      "postgres_name": "gmedida_enlacebalear",
+      "esios_id": "1173",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Exportación Portugal",
+      "postgres_name": "gmedida_eportugal",
+      "esios_id": "1179",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Importación Andorra",
+      "postgres_name": "gmedida_iandorra",
+      "esios_id": "1177",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Importación Portugal",
+      "postgres_name": "gmedida_iportugal",
+      "esios_id": "1175",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Exportación Marruecos",
+      "postgres_name": "gmedida_emarruecos",
+      "esios_id": "1180",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Exportación Francia",
+      "postgres_name": "gmedida_efrancia",
+      "esios_id": "1178",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Importación Marruecos",
+      "postgres_name": "gmedida_imarruecos",
+      "esios_id": "1176",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación medida Importación Francia",
+      "postgres_name": "gmedida_ifrancia",
+      "esios_id": "1174",
+      "publicacion": ""
+    }
+  ]
+}

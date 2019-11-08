@@ -1,0 +1,104 @@
+{
+  "provincia": false,
+  "indicadores":
+  [
+    {
+      "esios_name": "Generación T.Real Cogeneración y resto",
+      "esios_id": "1297",
+      "postgres_name": "gtreal_cogeneracion",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real Térmica renovable",
+      "esios_id": "1296",
+      "postgres_name": "gtreal_termica",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real Solar fotovoltaica",
+      "esios_id": "1295",
+      "postgres_name": "gtreal_fotovoltaica",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real Solar térmica",
+      "esios_id": "1294",
+      "postgres_name": "gtreal_solartermica",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real eólica",
+      "esios_id": "551",
+      "postgres_name": "gtreal_eolica",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real intercambios",
+      "esios_id": "553",
+      "postgres_name": "gtreal_intercambios",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real C.Combinado",
+      "esios_id": "550",
+      "postgres_name": "gtreal_ccombinado",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real enlace balear",
+      "esios_id": "554",
+      "postgres_name": "gtreal_enlacebalear",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real hidráulica",
+      "esios_id": "546",
+      "postgres_name": "gtreal_hidraulica",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real nuclear",
+      "esios_id": "549",
+      "postgres_name": "gtreal_nuclear",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real fuel-gas",
+      "esios_id": "548",
+      "postgres_name": "gtreal_fuelgas",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Generación T.Real carbón",
+      "esios_id": "547",
+      "postgres_name": "gtreal_carbon",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Porcentaje de generación libre de CO2",
+      "esios_id": "10033",
+      "postgres_name": "gtreal_libreco2",
+      "description": "",
+      "publicacion": ""
+    },
+    {
+      "esios_name": "Demanda real",
+      "esios_id": "1293",
+      "postgres_name": "gtreal_demanda",
+      "description": "",
+      "publicacion": ""
+    }
+    ]
+}
