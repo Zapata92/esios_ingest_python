@@ -35,18 +35,17 @@ class PostgresEsiosHook():
         self.port = port
 
     def get_uri(self):
-        conn = self.get_conn()
         login = ""
-        if conn.login:
+        if self.login:
             login = ("{login}:{passw}@".format(login=self.login,
-                                              passw=self.passw))
+                                                    passw=self.password))
         host = self.host
         if self.port is not None:
             host += ":{port}".format(port=self.port)
 
         uri = ("{conn_type}://{login}{host}/{schema}"
                .format(conn_type=self.conn_type,
-                       login=self.login,
+                       login=login,
                        host=self.host,
                        schema=self.schema))
         return uri
@@ -62,7 +61,8 @@ class PostgresEsiosHook():
         engine = self.get_sqlalchemy_engine(engine_kwargs)
         try:
             connection = engine.raw_connection()
-        except exc.OperatioalError:
+        #except exc.OperatioalError:
+        except Exception:
             print("OperationalError: "
                   "Unable to connect to Server of Postgres database")
             raise
@@ -93,7 +93,8 @@ class PostgresEsiosHook():
             cursor.close()
         except psycopg2.ProgrammingError as e:
             print("ProgrammingError:\n", e)
-            raise
+            result = None
+            pass
         except Exception:
             print("UnControlled Error")
             raise
@@ -110,7 +111,8 @@ class PostgresEsiosHook():
             cursor.close()
         except psycopg2.ProgrammingError as e:
             print("ProgrammingError:\n", e)
-            raise
+            rasults = None
+            pass
         except Exception:
             print("UnControlled Error")
             raise

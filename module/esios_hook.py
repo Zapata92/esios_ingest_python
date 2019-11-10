@@ -92,6 +92,6 @@ class EsiosHook():
         try:
             json_data = response.read().decode('utf-8')
         except:
-            json_data = response.readall().decode('utf-8')
+            json_data = response.read().decode('utf-8')
         result = json.loads(json_data)
         return result

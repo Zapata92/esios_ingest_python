@@ -113,6 +113,16 @@ class EsiosOperator():
         return df
         print("There are not more columns without data")
 
+    def date_range(self, start, end, intv):
+        ranges = []
+        start = datetime.datetime.strptime(start,"%Y-%m-%dT%H:%M:%S")
+        end = datetime.datetime.strptime(end,"%Y-%m-%dT%H:%M:%S")
+        diff = (end  - start ) / intv
+        for i in range(intv):
+            ranges.append((start + diff * i).strftime("%Y-%m-%dT%H:%M:%S"))
+        ranges.append(end.strftime("%Y-%m-%dT%H:%M:%S"))
+        return ranges
+
     def calculate_columns_df(self, df, sum_cols, new_col):
         try:
             df[new_col] = df[sum_cols].sum(axis=1)
@@ -129,7 +139,7 @@ class EsiosOperator():
             df = df.drop(columns=[drop_cols])
         except KeyError:
             print("Some columns in the list to remove is not in df")
-            raise
+            pass
         except Exception:
             print("UnControlled Error")
             raise
@@ -142,7 +152,7 @@ class EsiosOperator():
         return df
 
 
-class PostgresOperator():
+class PostgresEsiosOperator():
     """
     Get table about Indicators Operators from esios Api
     :param token: personal authentication to use esios api
@@ -182,9 +192,9 @@ class PostgresOperator():
                  .format(self.table))
         result = postgres.fetchone(query)
         if not result:
-            result = "2018-01-01T00:00:00"
+            result = "2016-01-01T00:00:00"
         else:
             result = postgres.fetchone(query)[0]
-            result = datetime.timedelta(minutes=1) + result
+            result = datetime.timedelta(minutes=10) + result
             result = result.strftime("%Y-%m-%dT%H:%M:%S")
         return result
