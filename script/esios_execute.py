@@ -67,7 +67,93 @@ for table in tables:
             datetime.timedelta(minutes=10)).strftime("%Y-%m-%dT%H:%M:%S")
                 df = esios_op.create_indicators_df(info_table, 
                                            start, 
-                                           end)                
+                                           end)
+                NoneType = type(None)
+                if not isinstance(df, NoneType):
+                    df = esios_op.missing_control_df(df[0],df[1])
+                    if table == "precios":
+                        df = df[df["geo_id"] == 3]
+                    else:
+                        df = esios_op.groupby_time_esios_df(df, time_field, pk_fields)
+                        if table == "generacion_tiemporeal":
+                            greal_renovables = ["gtreal_termica", 
+                                                "gtreal_fotovoltaica",
+                                                "gtreal_solartermica", 
+                                                "gtreal_eolica",
+                                                "gtreal_hidraulica"]
+                            greal_no_renovables = ["gtreal_cogeneracion", 
+                                                   "gtreal_ccombinado",
+                                                   "gtreal_nuclear", 
+                                                   "gtreal_carbon"]
+                            greal_tconexiones = ["gtreal_intercambios", 
+                                                 "gtreal_enlacebalear"]
+                            greal_total = ["gtreal_renovables", 
+                                           "gtreal_no_renovables",
+                                           "gtreal_tconexiones"]
+                            df = esios_op.calculate_columns_df(df, 
+                                                               greal_renovables, 
+                                                               "gtreal_renovables")
+                            df = esios_op.calculate_columns_df(df,
+                                                               greal_no_renovables,
+                                                               "gtreal_no_renovables")
+                            df = esios_op.calculate_columns_df(df,
+                                                               greal_tconexiones,
+                                                               "gtreal_tconexiones")
+                            df = esios_op.calculate_columns_df(df,
+                                                               greal_total,
+                                                               "gtreal_total")
+                        elif table == "generacion_medida":
+                            gmedia_termica = ["gmedida_oceano_geotermica",
+                                       "gmedida_biomasa"]
+                            gmedida_renovables = ['gmedida_termica',
+                                         'gmedida_fotovoltaica',
+                                         'gmedida_solartermica',
+                                         'gmedida_eolica',
+                                         'gmedida_hidraulica']
+                            gmedida_no_renovables = ['gmedida_cogeneracion',
+                                            'gmedida_ccombinado',
+                                            'gmedida_nuclear',
+                                            'gmedida_carbon']
+                            gmedida_internacionales = ['gmedida_eportugal',
+                                                       'gmedida_iportugal',
+                                                       'gmedida_efrancia',
+                                                       'gmedida_ifrancia',
+                                                       'gmedida_imarruecos',
+                                                       'gmedida_emarruecos']
+                            gmedida_total = ['gmedida_renovables',
+                                             'gmedida_no_renovables',
+                                             'gmedida_internacionales',
+                                             'gmedida_enlacebalear']
+                            df = esios_op.calculate_columns_df(df, 
+                                                               gmedia_termica, 
+                                                               "gmedida_termica")
+                            df = esios_op.calculate_columns_df(df, 
+                                                               gmedida_renovables, 
+                                                               "gmedida_renovables")
+                            df = esios_op.calculate_columns_df(df,
+                                                               gmedida_no_renovables,
+                                                               "gmedida_no_renovables")
+                            df = esios_op.calculate_columns_df(df,
+                                                               gmedida_internacionales,
+                                                               "gmedida_internacionales")
+                            df = esios_op.calculate_columns_df(df,
+                                                               gmedida_total,
+                                                               "gmedida_total")
+                            df = esios_op.drop_columns_df(df, ["gmedida_oceano_geotermica", 
+                                                               "gmedida_biomasa"]) 
+                        else:
+                            pass
+                    postgres_hook.load_df_esios(df, table)
+                    print("Load data from {} to {} in {}".format(start,
+                                                          end,
+                                                          table))
+        else:
+            NoneType = type(None)
+            if not isinstance(df, NoneType):
+                print("a")
+                df = esios_op.create_indicators_df(info_table, 
+                                           start_date, 
+                                           end_date)                
                 df = esios_op.missing_control_df(df[0],df[1])
                 if table == "precios":
                     df = df[df["geo_id"] == 3]
@@ -140,86 +226,5 @@ for table in tables:
                         df = esios_op.drop_columns_df(df, ["gmedida_oceano_geotermica", 
                                                            "gmedida_biomasa"]) 
                     else:
-                        pass
-                    postgres_hook.load_df_esios(df, table)
-                    print("Load data from {} to {} in {}".format(start,
-                                                                 end,
-                                                                 table))
-        else:
-            df = esios_op.create_indicators_df(info_table, 
-                                       start_date, 
-                                       end_date)                
-            df = esios_op.missing_control_df(df[0],df[1])
-            if table == "precios":
-                df = df[df["geo_id"] == 3]
-            else:
-                df = esios_op.groupby_time_esios_df(df, time_field, pk_fields)
-                if table == "generacion_tiemporeal":
-                    greal_renovables = ["gtreal_termica", 
-                                        "gtreal_fotovoltaica",
-                                        "gtreal_solartermica", 
-                                        "gtreal_eolica",
-                                        "gtreal_hidraulica"]
-                    greal_no_renovables = ["gtreal_cogeneracion", 
-                                           "gtreal_ccombinado",
-                                           "gtreal_nuclear", 
-                                           "gtreal_carbon"]
-                    greal_tconexiones = ["gtreal_intercambios", 
-                                         "gtreal_enlacebalear"]
-                    greal_total = ["gtreal_renovables", 
-                                   "gtreal_no_renovables",
-                                   "gtreal_tconexiones"]
-                    df = esios_op.calculate_columns_df(df, 
-                                                       greal_renovables, 
-                                                       "gtreal_renovables")
-                    df = esios_op.calculate_columns_df(df,
-                                                       greal_no_renovables,
-                                                       "gtreal_no_renovables")
-                    df = esios_op.calculate_columns_df(df,
-                                                       greal_tconexiones,
-                                                       "gtreal_tconexiones")
-                    df = esios_op.calculate_columns_df(df,
-                                                       greal_total,
-                                                       "gtreal_total")
-                elif table == "generacion_medida":
-                    gmedia_termica = ["gmedida_oceano_geotermica",
-                               "gmedida_biomasa"]
-                    gmedida_renovables = ['gmedida_termica',
-                                 'gmedida_fotovoltaica',
-                                 'gmedida_solartermica',
-                                 'gmedida_eolica',
-                                 'gmedida_hidraulica']
-                    gmedida_no_renovables = ['gmedida_cogeneracion',
-                                    'gmedida_ccombinado',
-                                    'gmedida_nuclear',
-                                    'gmedida_carbon']
-                    gmedida_internacionales = ['gmedida_eportugal',
-                                               'gmedida_iportugal',
-                                               'gmedida_efrancia',
-                                               'gmedida_ifrancia',
-                                               'gmedida_imarruecos',
-                                               'gmedida_emarruecos']
-                    gmedida_total = ['gmedida_renovables',
-                                     'gmedida_no_renovables',
-                                     'gmedida_internacionales',
-                                     'gmedida_enlacebalear']
-                    df = esios_op.calculate_columns_df(df, 
-                                                       gmedia_termica, 
-                                                       "gmedida_termica")
-                    df = esios_op.calculate_columns_df(df, 
-                                                       gmedida_renovables, 
-                                                       "gmedida_renovables")
-                    df = esios_op.calculate_columns_df(df,
-                                                       gmedida_no_renovables,
-                                                       "gmedida_no_renovables")
-                    df = esios_op.calculate_columns_df(df,
-                                                       gmedida_internacionales,
-                                                       "gmedida_internacionales")
-                    df = esios_op.calculate_columns_df(df,
-                                                       gmedida_total,
-                                                       "gmedida_total")
-                    df = esios_op.drop_columns_df(df, ["gmedida_oceano_geotermica", 
-                                                       "gmedida_biomasa"]) 
-                else:
-                    pass           
-                postgres_hook.load_df_esios(df, table)    
+                        pass           
+                    postgres_hook.load_df_esios(df, table)    
