@@ -1,0 +1,83 @@
+{
+  "tables": [
+    "indicadores",
+    "generacion_medida",
+    "precios",
+    "demanda",
+    "generacion_tiemporeal"
+  ],
+  "esios_hk": {
+    "token": "b13af0538afc84e3723dd8f1a03ed0ba65fe0260c283ed0c85ab019b6e22d1b7",
+    "base_url": "https://api.esios.ree.es/indicators"
+  },
+  "ptgs_hook": {
+    "host": "localhost",
+    "port": "5432",
+    "conn_type": "postgres",
+    "database": "esios",
+    "user": "postgres",
+    "password": "postgres"
+  },
+  "script_vars": {
+    "tb_folder": "../tables",
+    "tm_field": "datetime",
+    "pk_fields": [
+      "geo_id",
+      "geo_name"
+    ],
+    "vb_folder": "../variables",
+    "gtr_rv": [
+      "gtreal_termica",
+      "gtreal_fotovoltaica",
+      "gtreal_solartermica",
+      "gtreal_eolica",
+      "gtreal_hidraulica"
+    ],
+    "gtr_nrv": [
+      "gtreal_cogeneracion",
+      "gtreal_ccombinado",
+      "gtreal_nuclear",
+      "gtreal_carbon"
+    ],
+    "gtr_tc": [
+      "gtreal_intercambios",
+      "gtreal_enlacebalear"
+    ],
+    "gtr_ttl": [
+      "gtreal_renovables",
+      "gtreal_no_renovables",
+      "gtreal_tconexiones"
+    ],
+    "gm_term": [
+      "gmedida_oceano_geotermica",
+      "gmedida_biomasa"
+    ],
+    "gm_rv": [
+      "gmedida_termica",
+      "gmedida_fotovoltaica",
+      "gmedida_solartermica",
+      "gmedida_eolica",
+      "gmedida_hidraulica"
+    ],
+    "gm_nrv": [
+      "gmedida_cogeneracion",
+      "gmedida_ccombinado",
+      "gmedida_nuclear",
+      "gmedida_carbon"
+    ],
+    "gm_int": [
+      "gmedida_eportugal",
+      "gmedida_iportugal",
+      "gmedida_efrancia",
+      "gmedida_ifrancia",
+      "gmedida_imarruecos",
+      "gmedida_emarruecos"
+    ],
+    "gm_ttl": [
+      "gmedida_renovables",
+      "gmedida_no_renovables",
+      "gmedida_internacionales",
+      "gmedida_enlacebalear"
+    ]
+  }
+}

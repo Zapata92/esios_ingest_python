@@ -9,7 +9,39 @@ import urllib
 from esios_hook import EsiosHook
 from postgres_hook import PostgresEsiosHook
 
+class Operator():
+    """
+    Get table about Indicators Operators from esios Api
+    :param token: personal authentication to use esios api
+    :type token: str
+    :param base_url: url to connect to esios api
+    :type: str
+    :table: table to load data in postgres database
+    """
 
+    def __init__(self,
+                 vars_folder,
+                 * args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.vars_folder = vars_folder
+
+    def load_variables(self):
+        try:
+            with open("{}/variables.json".format(self.vars_folder)) as f:
+                data = json.load(f)
+            tables = data["tables"]
+            esios_hk = data["esios_hk"]
+            ptgs_hook = data["ptgs_hook"]
+            script_vars = data["script_vars"]
+        except FileNotFoundError:
+            print("File Not Found, Check path of variables folder")
+            raise
+        except Exception:
+            print("UnControlled Error")
+            raise
+        return tables, esios_hk, ptgs_hook, script_vars
+
+        
 class EsiosOperator():
     """
     Get table about Indicators Operators from esios Api
@@ -113,15 +145,21 @@ class EsiosOperator():
         return df
         print("There are not more columns without data")
 
-    def date_range(self, start, end, intv):
+    def date_range(self, start, end):
         ranges = []
-        start = datetime.datetime.strptime(start,"%Y-%m-%dT%H:%M:%S")
-        end = datetime.datetime.strptime(end,"%Y-%m-%dT%H:%M:%S")
-        diff = (end  - start ) / intv
-        for i in range(intv):
-            ranges.append((start + diff * i).strftime("%Y-%m-%dT%H:%M:%S"))
-        ranges.append(end.strftime("%Y-%m-%dT%H:%M:%S"))
-        return ranges
+        start_dt = datetime.datetime.strptime(start,"%Y-%m-%dT%H:%M:%S")
+        end_dt = datetime.datetime.strptime(end,"%Y-%m-%dT%H:%M:%S")
+        load_period = (start_dt - end_dt).days
+        if load_period > 60:
+            intv =  int(np.ceil(load_period/60))
+            diff = (end_dt  - start_dt ) / intv
+            for i in range(intv):
+                ranges.append((start_dt + diff * i).strftime("%Y-%m-%dT%H:%M:%S"))
+            ranges.append(end_dt.strftime("%Y-%m-%dT%H:%M:%S"))
+            return ranges
+        else:
+            ranges = [start, end]
+            return ranges
 
     def calculate_columns_df(self, df, sum_cols, new_col):
         try:
