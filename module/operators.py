@@ -11,12 +11,19 @@ from postgres_hook import PostgresEsiosHook
 
 class Operator():
     """
-    Get table about Indicators Operators from esios Api
-    :param token: personal authentication to use esios api
-    :type token: str
-    :param base_url: url to connect to esios api
-    :type: str
-    :table: table to load data in postgres database
+    Load variables json
+    input
+        :param vars_folder: folder path of variables file
+        :type vars_folder: str
+    output:
+        :param tables: postgres tables name
+        :type tables: list
+        :param esios_hk: data about esios hook
+        :type esios_hk: dict         
+        :param ptgs_hook: data about postgres hook
+        :type ptgs_hook: dict 
+        :param script_vars: data about execute script
+        :type script_vars: dict
     """
 
     def __init__(self,
@@ -44,7 +51,9 @@ class Operator():
         
 class EsiosOperator():
     """
-    Get table about Indicators Operators from esios Api
+    Get and transformation Esios Api Data
+    :param table: table name of postgres database
+    :type table: str
     :param token: personal authentication to use esios api
     :type token: str
     :param base_url: url to connect to esios api
@@ -64,11 +73,13 @@ class EsiosOperator():
 
     def _get_table_description(self, folder):
         """
-        Get a JSON series
-        :param indicator: series indicator
-        :param start: Start date
-        :param end: End date
-        :return:
+        Get table information to transform name from differents tables
+        input
+            :param folder: table description path folder
+            :type folder: str
+        output
+            :param table_info: information of selected table
+            :type table_info: json
         """
 
         with open("{folder}/{table}.json".format(folder=folder,
@@ -77,6 +88,12 @@ class EsiosOperator():
         return table_info
 
     def create_description_df(self):
+        """
+        Create description dataframe with description of diferents Dataframes
+        output
+            :param df: idescription indicators dataframe
+            :type df: df
+        """        
         esios = EsiosHook(self.token, self.base_url)
         result = esios.check_and_run()
         df = pd.DataFrame(data=result["indicators"], columns=[
@@ -91,6 +108,19 @@ class EsiosOperator():
                              ind_description,
                              start_date_esios,
                              end_date_esios):
+        """
+        Create dataframe from differents indicators data depending of the table
+        input
+            :param ind_description: description info from _get_table_description
+            :type ind_description: json
+            :start_date_esios: start date from wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+            :end_date_esios: end date until wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+        output
+            :param df: indicators df
+            :type df: df
+        """    
         esios = EsiosHook(self.token, self.base_url)
         counter = 0
         info_col = []

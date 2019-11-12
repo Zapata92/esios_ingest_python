@@ -12,10 +12,18 @@ class PostgresEsiosHook():
     """
     Interact with Postgres Server.
 
-    :param postgres_conn_id: connection id to connect with postgres_hook
-    :type postgres_conn_id: str
-    :param method: the API method to be called
-    :type method: str
+    :param login: user of postgres database
+    :type login: str
+    :param password: password of postgres database
+    :type password: str
+    :param conn_type: database type
+    :type conn_type: str
+    :param host: host database server
+    :type host: str
+    :param schema: database name
+    :type schema: str
+    :param port: port database server
+    :type port: str
     """
 
     def __init__(
@@ -35,6 +43,12 @@ class PostgresEsiosHook():
         self.port = port
 
     def get_uri(self):
+        """
+        Get uri to connect with database server
+        output:
+            :param uri: uri te create database connector
+            :type: str
+        """
         login = ""
         if self.login:
             login = ("{login}:{passw}@".format(login=self.login,
@@ -51,6 +65,12 @@ class PostgresEsiosHook():
         return uri
 
     def get_sqlalchemy_engine(self, engine_kwargs=None):
+        """
+        Create engine from specific uri
+        output:
+            :param engine: engine of sqlalqchemy library
+            :type: sqlalchemy.Object
+        """
         if engine_kwargs is None:
             engine_kwargs = {}
         uri = self.get_uri()
@@ -58,6 +78,12 @@ class PostgresEsiosHook():
         return engine
 
     def get_connection(self, engine_kwargs=None):
+        """
+        Create connection from engine
+        output:
+            :param connection: connection of sqlalqchemy library
+            :type: sqlalchemy.Object
+        """
         engine = self.get_sqlalchemy_engine(engine_kwargs)
         try:
             connection = engine.raw_connection()
@@ -72,6 +98,15 @@ class PostgresEsiosHook():
         return connection
 
     def check_table(self, table, engine_kwargs=None):
+        """
+        Check if table exist
+        input:
+            :param table: database table to check
+            :type str
+        output:
+            :param check: true or false depending if exist or not
+            :type bool
+        """
         try:
             engine = self.get_sqlalchemy_engine(engine_kwargs)
             check = engine.has_table(table)
@@ -85,6 +120,15 @@ class PostgresEsiosHook():
         return check
 
     def fetchone(self, query):
+        """
+        Execute query and return one row
+        input:
+            :param quey: sql query to execute
+            :type str
+        output:
+            :param result: 
+            :type tuple
+        """
         connection = self.get_connection()
         try:
             cursor = connection.cursor()
@@ -103,6 +147,15 @@ class PostgresEsiosHook():
         return result
 
     def fetchall(self, query):
+        """
+        Execute query and return result
+        input:
+            :param quey: sql query to execute
+            :type str
+        output:
+            :param result: 
+            :type tuple
+        """
         connection = self.get_connection()
         try:
             cursor = connection.cursor()
@@ -111,7 +164,7 @@ class PostgresEsiosHook():
             cursor.close()
         except psycopg2.ProgrammingError as e:
             print("ProgrammingError:\n", e)
-            rasults = None
+            results = None
             pass
         except Exception:
             print("UnControlled Error")
@@ -121,6 +174,15 @@ class PostgresEsiosHook():
         return results
 
     def fetch_df(self, query, engine_kwargs=None):
+        """
+        Execute query and return result
+        input:
+            :param quey: sql query to execute
+            :type str
+        output:
+            :param result: 
+            :type df
+        """
         engine = self.get_sqlalchemy_engine(engine_kwargs)
         try:
             df = pd.read_sql_query(query, engine)
@@ -133,6 +195,17 @@ class PostgresEsiosHook():
         return df
 
     def load_df_esios(self, df, table, if_exists="append", engine_kwargs=None):
+        """
+        Load dataframe to postgres database
+        input:
+            :param df: dataframe to load
+            :type df
+            :param table: target table to load df
+            :type str
+            :param if_exists: condition if table exist (append or replace)
+            :type str
+        """
+
         engine = self.get_sqlalchemy_engine(engine_kwargs)
         is_table = self.check_table(table, engine_kwargs)
         if is_table:

@@ -33,6 +33,10 @@ class EsiosHook():
     def _get_headers_(self):
         """
         Create the specific headers to connect with esios API
+        output:
+            :param headers: specific headers to connect with esios Api,
+                            including authorization token
+            :type: dict
         """
         headers = dict()
         headers["Accept"] = ("application/json; "
@@ -46,6 +50,20 @@ class EsiosHook():
     def _get_conn_(self, indicator=None,
                    start_date_esios=None,
                    end_date_esios=None):
+        """
+        Create connection object to interact with Esios Api, its possible to use
+        indicators or not if what you want is the indicators info table
+        input:
+            :param indicator: indicator id which is downloaded the data
+            :type str
+            :start_date_esios: start date from wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+            :end_date_esios: end date until wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+        output:
+            :param req: request urllib object
+            :type urllib.Object
+        """
         base_url = self.base_url
         if indicator:
             if not start_date_esios or not end_date_esios:
@@ -81,6 +99,19 @@ class EsiosHook():
     def check_and_run(self, indicator=None,
                       start_date_esios=None,
                       end_date_esios=None):
+        """
+        Execute url request to get data from esios api
+        input:
+            :param indicator: indicator id which is downloaded the data
+            :type str
+            :start_date_esios: start date from wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+            :end_date_esios: end date until wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+        output:
+            :param result: data result of urllib request
+            :type json 
+        """    
         req = self._get_conn_(indicator, start_date_esios, end_date_esios)
         try:
             response = urllib.request.urlopen(req)

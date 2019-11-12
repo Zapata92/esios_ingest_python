@@ -1,8 +1,4 @@
 
-from postgres_hook import PostgresEsiosHook
-from operators import Operator
-from operators import PostgresEsiosOperator
-from operators import EsiosOperator
 import pandas as pd
 import datetime
 import sys
@@ -12,6 +8,10 @@ import numpy as np
 sys.path.append(os.getcwd())
 sys.path.append("../module/")
 
+from postgres_hook import PostgresEsiosHook
+from operators import Operator
+from operators import PostgresEsiosOperator
+from operators import EsiosOperator
 
 operator = Operator("../variables")
 tables, esios_hk, ptgs_hook, varbs = operator.load_variables()
