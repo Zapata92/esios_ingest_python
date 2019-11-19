@@ -163,6 +163,17 @@ class EsiosOperator():
             return None
 
     def missing_control_df(self, df, info_col):
+        """
+        Check if existing missing values and replace by 0
+        input
+            :param df: indicators df
+            :type df: Pandas Dataframe
+            :param info_col: list of indicators to ingest
+            :type info_col: list
+        output
+            :param df: indicators df
+            :type df: df
+        """    
         df.replace(to_replace=[None], value=0, inplace=True)
         df_columns = list(df.columns)
         for c in info_col:
@@ -176,6 +187,17 @@ class EsiosOperator():
         print("There are not more columns without data")
 
     def date_range(self, start, end):
+        """
+        Create list of time intervals
+        input
+            :start: start date from wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+            :end: end date until wich data is downloaded
+            :type str: format %Y-%m-%dT%H:%M:%S
+        output
+            :param ranges: list of time intervals
+            :type ranges: list
+        """  
         ranges = []
         start_dt = datetime.datetime.strptime(start,"%Y-%m-%dT%H:%M:%S")
         end_dt = datetime.datetime.strptime(end,"%Y-%m-%dT%H:%M:%S")
@@ -192,6 +214,19 @@ class EsiosOperator():
             return ranges
 
     def calculate_columns_df(self, df, sum_cols, new_col):
+        """
+        Create calculate columns, is the sum of other field
+        input
+            :param df: indicators df
+            :type df: Pandas Dataframe
+            :param sum_cols: list of indicators to sum
+            :type sum_cols: list
+            :param new_col: name of new column
+            :type new_col: string
+        output
+            :param df: indicators df
+            :type df: df
+        """ 
         try:
             df[new_col] = df[sum_cols].sum(axis=1)
         except KeyError:
@@ -203,6 +238,17 @@ class EsiosOperator():
         return df
 
     def drop_columns_df(self, df, drop_cols):
+        """
+        Drop specifics columns
+        input
+            :param df: indicators df
+            :type df: Pandas Dataframe
+            :param drop_cols: list of indicators to drop
+            :type drop_cols: list
+        output
+            :param df: indicators df
+            :type df: df
+        """ 
         try:
             df = df.drop(columns=[drop_cols])
         except KeyError:
@@ -214,6 +260,19 @@ class EsiosOperator():
         return df
 
     def groupby_time_esios_df(self, df, time_field, pk_fields, freq="60Min"):
+        """
+        Group data by hours by time and geolocalization
+        input
+            :param df: indicators df
+            :type df: Pandas Dataframe
+            :param time_field: name of time field
+            :type time_field: str
+            :param pk_fields: list of primary key fields
+            :type pk_fields: str
+        output
+            :param df: indicators df
+            :type df: Pandas Dataframe
+        """ 
         group = [pd.Grouper(freq=freq)] + pk_fields
         df = df.set_index(time_field).groupby(group).mean()
         df = df.reset_index()
@@ -222,14 +281,22 @@ class EsiosOperator():
 
 class PostgresEsiosOperator():
     """
-    Get table about Indicators Operators from esios Api
-    :param token: personal authentication to use esios api
-    :type token: str
-    :param base_url: url to connect to esios api
-    :type: str
-    :table: table to load data in postgres database
+    Interact with Postgres Hook to connect with postgres Database.
+    :param login: user of postgres database
+    :type login: str
+    :param password: password of postgres database
+    :type password: str
+    :param conn_type: database type
+    :type conn_type: str
+    :param host: host database server
+    :type host: str
+    :param schema: database name
+    :type schema: str
+    :param port: port database server
+    :type port: str
+    :param table: table name to execute query
+    :type table: str
     """
-
     def __init__(self,
                  table,
                  login,
@@ -249,6 +316,9 @@ class PostgresEsiosOperator():
         self.port = port
 
     def get_max_timestamp(self):
+        """
+        Get latest timestamp load, and return specif date if table not exist 
+        """      
         postgres = PostgresEsiosHook(
             self.login,
             self.password,

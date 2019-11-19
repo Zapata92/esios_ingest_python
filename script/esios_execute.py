@@ -16,15 +16,26 @@ from operators import EsiosOperator
 operator = Operator("../variables")
 tables, esios_hk, ptgs_hook, varbs = operator.load_variables()
 
+# Create end timestamp, to avoid duplicated data, always must be xx:50:00
 end_date = (datetime.datetime.now() +
-            datetime.timedelta(days=2)).strftime("%Y-%m-%dT%H:%M:%S")
+            datetime.timedelta(days=2))
+end_date_hour = int(end_date.strftime("%H"))
+end_date_min = int(end_date.strftime("%M"))
+if end_date_min>50:
+    end_date_hour = str(end_date_hour + 1) 
+else:
+    pass
+end_date = "{day}T{hour}:00:00".format(day=end_date.strftime("%Y-%m-%d"),
+                                       hour=end_date_hour)
 
+# Create hook connector from postgres_hook
 postgres_hook = PostgresEsiosHook(ptgs_hook["user"],
                                   ptgs_hook["password"],
                                   ptgs_hook["conn_type"],
                                   ptgs_hook["host"],
                                   ptgs_hook["database"],
                                   ptgs_hook["port"])
+
 for table in tables:
     esios_op = EsiosOperator(table, esios_hk["token"], esios_hk["base_url"])
     if table == "indicadores":
@@ -39,6 +50,7 @@ for table in tables:
                                             ptgs_hook["host"],
                                             ptgs_hook["database"],
                                             ptgs_hook["port"])
+        # Create list of ranges
         start_date = postgres_op.get_max_timestamp()
         info_table = esios_op._get_table_description(varbs["tb_folder"])
         ranges = esios_op.date_range(start_date, end_date)
@@ -53,9 +65,11 @@ for table in tables:
                 if table == "precios":
                     df = df[df["geo_id"] == 3]
                 else:
+                    # Group data by hours
                     df = esios_op.groupby_time_esios_df(df,
                                                         varbs["tm_field"],
                                                         varbs["pk_fields"])
+                    # Create calculate fields
                     if table == "generacion_tiemporeal":
                         df = esios_op.calculate_columns_df(df,
                                                            varbs["gtr_rv"],
