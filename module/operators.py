@@ -4,7 +4,6 @@ import html
 import json
 import pandas as pd
 import re
-import urllib
 import numpy as np
 from esios_hook import EsiosHook
 from postgres_hook import PostgresEsiosHook
@@ -208,10 +207,22 @@ class EsiosOperator():
             for i in range(intv):
                 ranges.append((start_dt + diff * i).strftime("%Y-%m-%dT%H:%M:%S"))
             ranges.append(end_dt.strftime("%Y-%m-%dT%H:%M:%S"))
-            return ranges
         else:
             ranges = [start, end]
-            return ranges
+        ranges_control = []
+        for date in ranges:
+            date = datetime.datetime.strptime(date,"%Y-%m-%dT%H:%M:%S")
+            date_hour = int(date.strftime("%H"))
+            date_min = int(date.strftime("%M"))
+            if date_min>50:
+                date_hour = str(date_hour + 1) 
+            else:
+                pass
+            date_hour = date.strftime("%H")
+            date = "{day}T{hour}:00:00".format(day=date.strftime("%Y-%m-%d"),
+                                                   hour=date_hour)
+            ranges_control.append(date)
+        return ranges_control
 
     def calculate_columns_df(self, df, sum_cols, new_col):
         """

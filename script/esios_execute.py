@@ -23,8 +23,9 @@ if end_date_min>50:
     end_date_hour = str(end_date_hour + 1) 
 else:
     pass
+date_hour = end_date.strftime("%H")
 end_date = "{day}T{hour}:00:00".format(day=end_date.strftime("%Y-%m-%d"),
-                                       hour=end_date_hour)
+                                       hour=date_hour)
 
 # Create hook connector from postgres_hook
 postgres_hook = PostgresEsiosHook(ptgs_hook["user"],
