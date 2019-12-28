@@ -7,6 +7,7 @@ import re
 import numpy as np
 from esios_hook import EsiosHook
 from postgres_hook import PostgresEsiosHook
+import os
 
 class Operator():
     """
@@ -30,7 +31,7 @@ class Operator():
                  * args, **kwargs):
         super().__init__(*args, **kwargs)
         self.vars_folder = vars_folder
-
+    print(os.getcwd())
     def load_variables(self):
         try:
             with open("{}/variables.json".format(self.vars_folder)) as f:

@@ -1,10 +1,10 @@
 {
   "tables": [
     "indicadores",
+    "generacion_tiemporeal",
     "generacion_medida",
     "precios",
-    "demanda",
-    "generacion_tiemporeal"
+    "demanda"
   ],
   "esios_hk": {
     "token": "b13af0538afc84e3723dd8f1a03ed0ba65fe0260c283ed0c85ab019b6e22d1b7",
