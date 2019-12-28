@@ -3,7 +3,6 @@ import pandas as pd
 import datetime
 import sys
 import os
-import numpy as np
 
 sys.path.append(os.getcwd())
 sys.path.append("../module/")
@@ -17,8 +16,7 @@ operator = Operator("../variables")
 tables, esios_hk, ptgs_hook, varbs = operator.load_variables()
 
 # Create end timestamp, to avoid duplicated data, always must be xx:50:00
-end_date = (datetime.datetime.now() +
-            datetime.timedelta(days=2))
+end_date = datetime.datetime.now()
 end_date_hour = int(end_date.strftime("%H"))
 end_date_min = int(end_date.strftime("%M"))
 if end_date_min>50:

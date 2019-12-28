@@ -5,7 +5,7 @@ import json
 import pandas as pd
 import re
 import urllib
-
+import numpy as np
 from esios_hook import EsiosHook
 from postgres_hook import PostgresEsiosHook
 
@@ -201,7 +201,7 @@ class EsiosOperator():
         ranges = []
         start_dt = datetime.datetime.strptime(start,"%Y-%m-%dT%H:%M:%S")
         end_dt = datetime.datetime.strptime(end,"%Y-%m-%dT%H:%M:%S")
-        load_period = (start_dt - end_dt).days
+        load_period = (end_dt - start_dt).days
         if load_period > 60:
             intv =  int(np.ceil(load_period/60))
             diff = (end_dt  - start_dt ) / intv
