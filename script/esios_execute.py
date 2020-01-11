@@ -3,7 +3,7 @@ import pandas as pd
 import datetime
 import sys
 import os
-os.chdir(os.path.dirname(__file__))
+sys.path.append(os.getcwd())
 sys.path.append("../module/")
 from postgres_hook import PostgresEsiosHook
 from operators import Operator
@@ -15,18 +15,7 @@ tables, esios_hk, ptgs_hook, varbs = operator.load_variables()
 
 # Create end timestamp, to avoid duplicated data, always must be xx:50:00
 end_date = (datetime.datetime.now() +
-            datetime.timedelta(days=2))
-
-#end_date = datetime.datetime.now()
-end_date_hour = int(end_date.strftime("%H"))
-end_date_min = int(end_date.strftime("%M"))
-if end_date_min>50:
-    end_date_hour = str(end_date_hour + 1) 
-else:
-    pass
-date_hour = end_date.strftime("%H")
-end_date = "{day}T{hour}:00:00".format(day=end_date.strftime("%Y-%m-%d"),
-                                       hour=date_hour)
+            datetime.timedelta(days=2)).strftime("%Y-%m-%dT%H:%M:%S")
 
 # Create hook connector from postgres_hook
 postgres_hook = PostgresEsiosHook(ptgs_hook["user"],
@@ -39,8 +28,8 @@ postgres_hook = PostgresEsiosHook(ptgs_hook["user"],
 for table in tables:
     esios_op = EsiosOperator(table, esios_hk["token"], esios_hk["base_url"])
     if table == "indicadores":
-        #df = esios_op.create_description_df()
-        #postgres_hook.load_df_esios(df, table, "replace")
+        df = esios_op.create_description_df()
+        postgres_hook.load_df_esios(df, table, "replace")
         pass
     else:
         postgres_op = PostgresEsiosOperator(table,
@@ -51,7 +40,7 @@ for table in tables:
                                             ptgs_hook["database"],
                                             ptgs_hook["port"])
         # Create list of ranges
-        start_date = postgres_op.get_max_timestamp()
+        start_date = postgres_op.get_max_timestamp(table)
         info_table = esios_op._get_table_description(varbs["tb_folder"])
         ranges = esios_op.date_range(start_date, end_date)
         for start, end in zip(ranges[:-1], ranges[1:]):
@@ -65,10 +54,6 @@ for table in tables:
                 if table == "precios":
                     df = df[df["geo_id"] == 3]
                 else:
-                    # Group data by hours
-                    df = esios_op.groupby_time_esios_df(df,
-                                                        varbs["tm_field"],
-                                                        varbs["pk_fields"])
                     # Create calculate fields
                     if table == "generacion_tiemporeal":
                         df = esios_op.calculate_columns_df(df,
@@ -102,6 +87,8 @@ for table in tables:
                         df = esios_op.drop_columns_df(df, varbs["gm_ttl"])
                     else:
                         pass
+                df = (df.groupby(['datetime',"geo_id","geo_name"])
+                                 .mean().reset_index())    
                 postgres_hook.load_df_esios(df, table)
                 print("Load data from {} to {} in {}".format(start,
                                                              end,

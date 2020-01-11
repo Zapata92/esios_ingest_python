@@ -208,22 +208,16 @@ class EsiosOperator():
             for i in range(intv):
                 ranges.append((start_dt + diff * i).strftime("%Y-%m-%dT%H:%M:%S"))
             ranges.append(end_dt.strftime("%Y-%m-%dT%H:%M:%S"))
+            ranges_intv = []
+            for tm in ranges:
+                tm = datetime.datetime.strptime(tm,"%Y-%m-%dT%H:%M:%S")
+                tm = tm - datetime.timedelta(minutes=tm.minute % 10,
+                                 seconds=tm.second)
+                ranges_intv.append(tm.strftime("%Y-%m-%dT%H:%M:%S"))
+            return ranges_intv    
         else:
             ranges = [start, end]
-        ranges_control = []
-        for date in ranges:
-            date = datetime.datetime.strptime(date,"%Y-%m-%dT%H:%M:%S")
-            date_hour = int(date.strftime("%H"))
-            date_min = int(date.strftime("%M"))
-            if date_min>50:
-                date_hour = str(date_hour + 1) 
-            else:
-                pass
-            date_hour = date.strftime("%H")
-            date = "{day}T{hour}:00:00".format(day=date.strftime("%Y-%m-%d"),
-                                                   hour=date_hour)
-            ranges_control.append(date)
-        return ranges_control
+            return ranges
 
     def calculate_columns_df(self, df, sum_cols, new_col):
         """
@@ -327,7 +321,7 @@ class PostgresEsiosOperator():
         self.schema = schema
         self.port = port
 
-    def get_max_timestamp(self):
+    def get_max_timestamp(self, table):
         """
         Get latest timestamp load, and return specif date if table not exist 
         """      
@@ -345,6 +339,9 @@ class PostgresEsiosOperator():
             result = "2016-01-01T00:00:00"
         else:
             result = postgres.fetchone(query)[0]
-            result = datetime.timedelta(minutes=10) + result
+            if table!="generacion_medida" and table!="precios":
+                result = datetime.timedelta(minutes=10) + result
+            else:
+                result = datetime.timedelta(minutes=60) + result
             result = result.strftime("%Y-%m-%dT%H:%M:%S")
         return result

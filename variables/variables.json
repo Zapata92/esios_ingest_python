@@ -14,7 +14,7 @@
     "host": "localhost",
     "port": "5432",
     "conn_type": "postgres",
-    "database": "esios",
+    "database": "mercado_electrico",
     "user": "postgres",
     "password": "postgres"
   },
