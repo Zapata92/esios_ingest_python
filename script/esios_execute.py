@@ -40,8 +40,8 @@ for table in tables:
                                             ptgs_hook["database"],
                                             ptgs_hook["port"])
         # Create list of ranges
-        start_date = postgres_op.get_max_timestamp(table)
-        info_table = esios_op._get_table_description(varbs["tb_folder"])
+        info_table = esios_op.get_table_description(varbs["tb_folder"])
+        start_date = postgres_op.get_max_timestamp(table,info_table["publicacion"])
         ranges = esios_op.date_range(start_date, end_date)
         for start, end in zip(ranges[:-1], ranges[1:]):
             end = (datetime.datetime.strptime(end, "%Y-%m-%dT%H:%M:%S") -
@@ -51,9 +51,13 @@ for table in tables:
                                                end)
             if df:
                 df = esios_op.missing_control_df(df[0], df[1])
+                """
                 if table == "precios":
                     df = df[df["geo_id"] == 3]
                 else:
+                  pass
+                """
+                '''
                     # Create calculate fields
                     if table == "generacion_tiemporeal":
                         df = esios_op.calculate_columns_df(df,
@@ -87,6 +91,7 @@ for table in tables:
                         df = esios_op.drop_columns_df(df, varbs["gm_ttl"])
                     else:
                         pass
+                '''
                 df = (df.groupby(['datetime',"geo_id","geo_name"])
                                  .mean().reset_index())    
                 postgres_hook.load_df_esios(df, table)
