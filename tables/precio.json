@@ -1,0 +1,11 @@
+{
+  "provincia": false,
+  "publicacion": 60,
+  "indicadores": [
+    {
+      "esios_name": "Precio mercado SPOT Diario",
+      "esios_id": "600",
+      "postgres_name": "p_spot_diario"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "provincia": false,
+  "publicacion": 60,
+  "indicadores": [
+    {
+      "esios_name": "Sentido de los desvíos contrarios al sistema",
+      "esios_id": "684",
+      "postgres_name": "sentido_desvios"
+    },
+    {
+      "esios_name": "Coste del desvíos contrario respecto al precio del mercado SPOT diario",
+      "esios_id": "685",
+      "postgres_name": "coste_desvios"
+    },
+    {
+      "esios_name": "Precio de cobro desvíos a subir",
+      "esios_id": "686",
+      "postgres_name": "precio_desvios_bajar"
+    },
+    {
+      "esios_name": "Precio de pago desvíos a bajar",
+      "esios_id": "687",
+      "postgres_name": "precio_desvios_bajar"
+    }
+  ]
+}

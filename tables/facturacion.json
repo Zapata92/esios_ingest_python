@@ -1,0 +1,21 @@
+{
+  "provincia": false,
+  "publicacion": 60,
+  "indicadores": [
+    {
+      "esios_name": "Término de facturación de energía activa del PVPC eficiencia 2 periodos (DHA)",
+      "esios_id": "1014",
+      "postgres_name": "f_pvpc_dha"
+    },
+    {
+      "esios_name": "Término de facturación de energía activa del PVPC vehículo eléctrico",
+      "esios_id": "1015",
+      "postgres_name": "f_pvpc_veh_elec"
+    },
+    {
+      "esios_name": "Término de facturación de energía activa del PVPC peaje por defecto",
+      "esios_id": "1013",
+      "postgres_name": "f_pvpc_defecto"
+    }
+  ]
+}

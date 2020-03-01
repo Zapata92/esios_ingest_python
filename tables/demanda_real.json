@@ -1,0 +1,11 @@
+{
+  "provincia": false,
+  "publicacion": 10,
+  "indicadores": [
+    {
+      "esios_name": "Demanda real",
+      "esios_id": "1293",
+      "postgres_name": "demanda_real"
+    }
+  ]
+}

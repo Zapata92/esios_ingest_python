@@ -1,0 +1,116 @@
+{
+  "provincia": false,
+  "publicacion": 60,
+  "indicadores": [
+    {
+      "esios_name": "Generación programada P48 Turbinación bombeo",
+      "postgres_name": "p48_gp_bombeo",
+      "esios_id": "73"
+    },
+    {
+      "esios_name": "Generación programada P48 Nuclear",
+      "postgres_name": "p48_gp_nuclear",
+      "esios_id": "74"
+    },
+    {
+      "esios_name": "Generación programada P48 Ciclo combinado",
+      "postgres_name": "p48_gp_ciclo_combinado",
+      "esios_id": "79"
+    },
+    {
+      "esios_name": "Generación programada P48 Solar fotovoltaica",
+      "postgres_name": "p48_gp_solar_fotovoltaica",
+      "esios_id": "84"
+    },
+    {
+      "esios_name": "Generación programada P48 Solar térmica",
+      "postgres_name": "p48_gp_solar_termica",
+      "esios_id": "85"
+    },
+    {
+      "esios_name": "Generación programada P48 Enlace Baleares",
+      "postgres_name": "p48_gp_enlace_baleares",
+      "esios_id": "96"
+    },
+    {
+      "esios_name": "Demanda programada P48 Comercializadores de referencia",
+      "postgres_name": "p48_dp_comerc_ref",
+      "esios_id": "366"
+    },
+    {
+      "esios_name": "Demanda programada P48 Consumos directos en mercado",
+      "postgres_name": "p48_dp_dir_mercado",
+      "esios_id": "367"
+    },
+    {
+      "esios_name": "Demanda programada P48 Consumo de Servicios Auxiliares",
+      "postgres_name": "p48_dp_serv_aux",
+      "esios_id": "368"
+    },
+    {
+      "esios_name": "Demanda programada P48 Comercializadores mercado libre",
+      "postgres_name": "p48_dp_mercado_libre",
+      "esios_id": "365"
+    },
+    {
+      "esios_name": "Generación programada P48 Eólica",
+      "postgres_name": "p48_gp_eolica",
+      "esios_id": "10010"
+    },
+    {
+      "esios_name": "Generación programada P48 Cogeneración",
+      "postgres_name": "p48_gp_cogeneracion",
+      "esios_id": "10011"
+    },
+    {
+      "esios_name": "Generación programada P48 Residuos no renovables",
+      "postgres_name": "p48_gp_res_no_renovables",
+      "esios_id": "10012"
+    },
+    {
+      "esios_name": "Generación programada P48 otras renovables",
+      "postgres_name": "p48_gp_otras_renovables",
+      "esios_id": "10013"
+    },
+    {
+      "esios_name": "Generación programada P48 Saldo Portugal",
+      "postgres_name": "p48_ip_portugal",
+      "esios_id": "10014"
+    },
+    {
+      "esios_name": "Generación programada P48 Saldo Francia",
+      "postgres_name": "p48_ip_francia",
+      "esios_id": "10015"
+    },
+    {
+      "esios_name": "Generación programada P48 Saldo Andorra",
+      "postgres_name": "p48_ip_andorra",
+      "esios_id": "10017"
+    },
+    {
+      "esios_name": "Generación programada + Consumo bombeo + Cable Baleares P48",
+      "postgres_name": "p48_gp_bombeo_y_baleares",
+      "esios_id": "10024"
+    },
+    {
+      "esios_name": "Saldo total interconexiones programa p48",
+      "postgres_name": "p48_ip_total",
+      "esios_id": "10026"
+    },
+    {
+      "esios_name": "Demanda programada P48 total",
+      "postgres_name": "p48_gp_total",
+      "esios_id": "10027"
+    },
+    {
+      "esios_name": "Total Generación + Total Interconexiones programada p48",
+      "postgres_name": "p48_ip_gp_total",
+      "esios_id": "10027"
+    },
+    {
+      "esios_name": "Generación programada P48 UGH + no UGH",
+      "postgres_name": "p48_gp_hidraulica",
+      "esios_id": "10063"
+    }
+  ]
+}

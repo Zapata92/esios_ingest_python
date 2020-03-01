@@ -1,125 +1,106 @@
 {
   "provincia": true,
+  "publicacion": 60,
   "indicadores": [
     {
       "esios_name": "Generación medida cogeneración",
-      "postgres_name": "gmedida_cogeneracion",
-      "esios_id": "10039",
-      "publicacion": ""
+      "postgres_name": "gm_cogeneracion",
+      "esios_id": "10039"
     },
     {
       "esios_name": "Generación medida Fuel-gas",
-      "postgres_name": "gmedida_fuelgas",
-      "esios_id": "10038",
-      "publicacion": ""
+      "postgres_name": "gm_fuelgas",
+      "esios_id": "10038"
     },
     {
       "esios_name": "Generación medida Eólica",
-      "postgres_name": "gmedida_eolica",
-      "esios_id": "10037",
-      "publicacion": ""
+      "postgres_name": "gm_eolica",
+      "esios_id": "10037"
     },
     {
       "esios_name": "Generación medida Carbón",
-      "postgres_name": "gmedida_carbon",
-      "esios_id": "10036",
-      "publicacion": ""
+      "postgres_name": "gm_carbon",
+      "esios_id": "10036"
     },
     {
       "esios_name": "Generación medida Hidráulica",
-      "postgres_name": "gmedida_hidraulica",
-      "esios_id": "10035",
-      "publicacion": ""
+      "postgres_name": "gm_hidraulica",
+      "esios_id": "10035"
     },
     {
       "esios_name": "Generación medida Biomasa",
-      "postgres_name": "gmedida_biomasa",
-      "esios_id": "1168",
-      "publicacion": ""
+      "postgres_name": "gm_biomasa",
+      "esios_id": "1168"
     },
     {
       "esios_name": "Generación medida Solar térmica",
-      "postgres_name": "gmedida_solartermica",
-      "esios_id": "1162",
-      "publicacion": ""
+      "postgres_name": "gm_solar_termica",
+      "esios_id": "1162"
     },
     {
       "esios_name": "Generación medida Ciclo combinado",
-      "postgres_name": "gmedida_ccombinado",
-      "esios_id": "1156",
-      "publicacion": ""
+      "postgres_name": "gm_ciclo_combinado",
+      "esios_id": "1156"
     },
     {
       "esios_name": "Generación medida Nuclear",
-      "postgres_name": "gmedida_nuclear",
-      "esios_id": "1153",
-      "publicacion": ""
+      "postgres_name": "gm_nuclear",
+      "esios_id": "1153"
     },
     {
       "esios_name": "Generación medida Turbinación bombeo",
-      "postgres_name": "gmedida_turbinacionbombeo",
-      "esios_id": "1152",
-      "publicacion": ""
+      "postgres_name": "gm_bombeo",
+      "esios_id": "1152"
     },
     {
       "esios_name": "Generación medida Océano y geotérmica",
-      "postgres_name": "gmedida_oceano_geotermica",
-      "esios_id": "1163",
-      "publicacion": ""
+      "postgres_name": "gm_oceano_geotermica",
+      "esios_id": "1163"
     },
     {
       "esios_name": "Generación medida Solar fotovoltaica",
-      "postgres_name": "gmedida_fotovoltaica",
-      "esios_id": "1161",
-      "publicacion": ""
+      "postgres_name": "gm_solar_fotovoltaica",
+      "esios_id": "1161"
     },
     {
       "esios_name": "Generación medida Enlace Baleares",
-      "postgres_name": "gmedida_enlacebalear",
-      "esios_id": "1173",
-      "publicacion": ""
+      "postgres_name": "gm_enlace_baleares",
+      "esios_id": "1173"
     },
     {
       "esios_name": "Generación medida Exportación Portugal",
-      "postgres_name": "gmedida_eportugal",
-      "esios_id": "1179",
-      "publicacion": ""
+      "postgres_name": "em_portugal",
+      "esios_id": "1179"
     },
     {
       "esios_name": "Generación medida Importación Andorra",
-      "postgres_name": "gmedida_iandorra",
-      "esios_id": "1177",
-      "publicacion": ""
+      "postgres_name": "im_andorra",
+      "esios_id": "1177"
     },
     {
       "esios_name": "Generación medida Importación Portugal",
-      "postgres_name": "gmedida_iportugal",
-      "esios_id": "1175",
-      "publicacion": ""
+      "postgres_name": "im_portugal",
+      "esios_id": "1175"
     },
     {
       "esios_name": "Generación medida Exportación Marruecos",
-      "postgres_name": "gmedida_emarruecos",
-      "esios_id": "1180",
-      "publicacion": ""
+      "postgres_name": "em_marruecos",
+      "esios_id": "1180"
     },
     {
       "esios_name": "Generación medida Exportación Francia",
-      "postgres_name": "gmedida_efrancia",
-      "esios_id": "1178",
-      "publicacion": ""
+      "postgres_name": "em_efrancia",
+      "esios_id": "1178"
     },
     {
       "esios_name": "Generación medida Importación Marruecos",
-      "postgres_name": "gmedida_imarruecos",
-      "esios_id": "1176",
-      "publicacion": ""
+      "postgres_name": "im_imarruecos",
+      "esios_id": "1176"
     },
     {
       "esios_name": "Generación medida Importación Francia",
-      "postgres_name": "gmedida_ifrancia",
-      "esios_id": "1174",
-      "publicacion": ""
+      "postgres_name": "im_ifrancia",
+      "esios_id": "1174"
     }
   ]
 }

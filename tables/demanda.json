@@ -1,19 +1,16 @@
 {
   "provincia": false,
+  "publicacion": 10,
   "indicadores": [
     {
       "esios_name": "Demanda programada",
       "esios_id": "545",
-      "postgres_name": "d_programada",
-      "description": "",
-      "publicacion": ""
+      "postgres_name": "demanda_programada"
     },
     {
       "esios_name": "Demanda prevista",
       "esios_id": "544",
-      "postgres_name": "d_prevista",
-      "description": "",
-      "publicacion": ""
+      "postgres_name": "demanda_prevista"
     }
   ]
 }

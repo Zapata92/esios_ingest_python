@@ -1,0 +1,16 @@
+{
+  "provincia": false,
+  "publicacion": 10,
+  "indicadores": [
+    {
+      "esios_name": "Porcentaje de generación libre de CO2",
+      "esios_id": "10033",
+      "postgres_name": "pgtr_libre_co2"
+    },
+    {
+      "esios_name": "Generación libre de CO2",
+      "esios_id": "10006",
+      "postgres_name": "gtr_libre_co2"
+    }
+  ]
+}

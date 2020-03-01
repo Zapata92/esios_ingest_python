@@ -71,7 +71,7 @@ class EsiosOperator():
         self.token = token
         self.base_url = base_url
 
-    def _get_table_description(self, folder):
+    def get_table_description(self, folder):
         """
         Get table information to transform name from differents tables
         input
@@ -321,7 +321,7 @@ class PostgresEsiosOperator():
         self.schema = schema
         self.port = port
 
-    def get_max_timestamp(self, table):
+    def get_max_timestamp(self, table, publicacion):
         """
         Get latest timestamp load, and return specif date if table not exist 
         """      
@@ -336,12 +336,9 @@ class PostgresEsiosOperator():
                  .format(self.table))
         result = postgres.fetchone(query)
         if not result:
-            result = "2016-01-01T00:00:00"
+            result = "2018-01-01T00:00:00"
         else:
             result = postgres.fetchone(query)[0]
-            if table!="generacion_medida" and table!="precios":
-                result = datetime.timedelta(minutes=10) + result
-            else:
-                result = datetime.timedelta(minutes=60) + result
+            result = datetime.timedelta(minutes=publicacion) + result
             result = result.strftime("%Y-%m-%dT%H:%M:%S")
         return result

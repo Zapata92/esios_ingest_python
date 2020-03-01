@@ -221,6 +221,12 @@ class PostgresEsiosHook():
         else:
             try:
                 df.to_sql(table, engine, index=False)
+                if table!="indicadores":
+                    with engine.connect() as con:
+                        con.execute("ALTER TABLE {} ADD PRIMARY KEY" 
+                            "(datetime, geo_id, geo_name);".format(table))
+                else:
+                    pass
             except exc.ProgrammingError as e:
                 print("ProgrammingError:\n", e)
                 raise
