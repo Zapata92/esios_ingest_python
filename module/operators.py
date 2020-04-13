@@ -336,7 +336,7 @@ class PostgresEsiosOperator():
                  .format(self.table))
         result = postgres.fetchone(query)
         if not result:
-            result = "2016-01-01T00:00:00"
+            result = "2015-01-01T00:00:00"
         else:
             result = postgres.fetchone(query)[0]
             result = datetime.timedelta(minutes=publicacion) + result
