@@ -10,7 +10,7 @@ import html
 import json
 import pandas as pd
 import re
-import urllib
+import urllib.request
 
 
 class EsiosHook():
