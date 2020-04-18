@@ -1,0 +1,26 @@
+{
+  "provincia": false,
+  "publicacion": 60,
+  "indicadores": [
+    {
+      "esios_name": "Previsión diaria D+1 eólica más fotovoltaica",
+      "esios_id": "10358",
+      "postgres_name": "gpv_eolyfot"
+    },
+    {
+      "esios_name": "Previsión diaria D+1 fotovoltaica",
+      "esios_id": "1779",
+      "postgres_name": "gpv_fotovoltaica"
+    },
+    {
+      "esios_name": "Previsión diaria D+1 eólica",
+      "esios_id": "1777",
+      "postgres_name": "gpv_eolica"
+    },
+    {
+      "esios_name": "Previsión diaria D+1 demanda",
+      "esios_id": "1775",
+      "postgres_name": "gpv_demanda"
+    }
+  ]
+}
