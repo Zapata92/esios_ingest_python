@@ -53,6 +53,21 @@
       "esios_id": "365"
     },
     {
+      "esios_name": "Demanda programada P48 Corrección eólica",
+      "postgres_name": "p48_dp_correc_eolica",
+      "esios_id": "369"
+    },
+    {
+      "esios_name": "Demanda programada P48 Corrección REE",
+      "postgres_name": "p48_dp_correc_ree",
+      "esios_id": "371"
+    },
+    {
+      "esios_name": "Generación programada P48 Carbón",
+      "postgres_name": "p48_gp_carbon",
+      "esios_id": "10008"
+    },
+    {
       "esios_name": "Generación programada P48 Eólica",
       "postgres_name": "p48_gp_eolica",
       "esios_id": "10010"
@@ -83,6 +98,11 @@
       "esios_id": "10015"
     },
     {
+      "esios_name": "Generación programada P48 Saldo Marruecos",
+      "postgres_name": "p48_ip_marruecos",
+      "esios_id": "10016"
+    },
+    {
       "esios_name": "Generación programada P48 Saldo Andorra",
       "postgres_name": "p48_ip_andorra",
       "esios_id": "10017"
@@ -105,7 +125,7 @@
     {
       "esios_name": "Total Generación + Total Interconexiones programada p48",
       "postgres_name": "p48_ip_gp_total",
-      "esios_id": "10027"
+      "esios_id": "10042"
     },
     {
       "esios_name": "Generación programada P48 UGH + no UGH",
