@@ -10,9 +10,16 @@ En esta carpeta se encuentran los ficheros de las tablas que se van a generar en
 | File  | Description |
 | ------------- | ------------- | 
 | demanda  | Información de la demanda en la pemínsula  | 
-| precios  | Información tanto del precio del spot diario como del pvpc| 
-| generacion_tiemporeal | Información acerca de la generación por cada tipo de tecnología en la península en tiempo real (cada 10 minutos) | 
+| demanda_real  |  Demanda real de la península | 
+| desvios  |  Precio de cobro y costes de los desvíos del mercado eléctrico | 
+| facturación  |  Términos de Facturación de energía activa en en diferentes tipos de factura | 
+| generación libre de CO2  |  Gneración con energías libres de CO2 y porcentaje sobre el total de las mismas | 
 | generacion_medida | Información acerca de la generación por cada tipo de tecnología en las diferentes provincias con un desfase de un mes | 
+| generación p48  |  Generación en el programa horario operativo | 
+| generación prevista  |  Previsión Diaria de las energías eólica y fotovoltaica, además del total generado | 
+| generacion_tiemporeal | Información acerca de la generación por cada tipo de tecnología en la península en tiempo real (cada 10 minutos) | 
+| precios  | Información tanto del precio del spot diario como del pvpc| 
+
 
 ### variables
 Obtiene el fichero de variables del cual se alimenta el script de ejecución, desde los parámetros para las conexiones, como ciertas listas de valores que facilitan un código más limpio y ordenado.
